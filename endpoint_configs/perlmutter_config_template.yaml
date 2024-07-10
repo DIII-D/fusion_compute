@@ -1,0 +1,27 @@
+engine:
+  address:
+    ifname: nmnb0
+    type: address_by_interface
+  available_accelerators: 4
+  cpu_affinity: block
+  max_retries_on_system_failure: 2
+  prefetch_capacity: 0
+  provider:
+    account: m3739
+    init_blocks: 0
+    launcher:
+      overrides: "--gpus-per-node 4 -c 64"
+      type: SrunLauncher
+    max_blocks: 1
+    min_blocks: 0
+    nodes_per_block: 1
+    partition: debug
+    scheduler_options: '#SBATCH -C gpu'
+    type: SlurmProvider
+    walltime: 00:30:00
+    worker_init: module load python; source activate /global/common/software/m3739/perlmutter/conda_envs/globus; PATH=$PATH:/global/
+common/software/m3739/perlmutter/ionorb/bin/; cd $HOME/.globus_compute/perlmutter
+  strategy:
+    max_idletime: 300
+    type: SimpleStrategy
+  type: GlobusComputeEngine
